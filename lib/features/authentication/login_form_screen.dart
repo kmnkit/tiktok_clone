@@ -11,20 +11,56 @@ class LoginFormScreen extends StatefulWidget {
 }
 
 class _LoginFormScreenState extends State<LoginFormScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  void _onSubmitTap() {
+    if (_formKey.currentState != null) {
+      if (_formKey.currentState!.validate()) {
+        _formKey.currentState!.save();
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
       title: 'Log In',
       body: Form(
+        key: _formKey,
         child: Column(
           children: [
-            const TextField(),
-            Gaps.v16,
-            const TextField(),
             Gaps.v28,
-            CustomFormButton(
-              disabled: false,
-              abledColor: Colors.amber.shade500,
+            TextFormField(
+              decoration: const InputDecoration(
+                hintText: 'Email',
+              ),
+              validator: (value) {
+                return null;
+              },
+              onSaved: (newValue) {
+                print(newValue);
+              },
+            ),
+            Gaps.v16,
+            TextFormField(
+              decoration: const InputDecoration(
+                hintText: 'Password',
+              ),
+              validator: (value) {
+                return null;
+              },
+              onSaved: (newValue) {
+                if (newValue != null) {
+                  return;
+                }
+              },
+            ),
+            Gaps.v28,
+            GestureDetector(
+              onTap: _onSubmitTap,
+              child: CustomFormButton(
+                disabled: false,
+                abledColor: Colors.amber.shade500,
+              ),
             ),
           ],
         ),
