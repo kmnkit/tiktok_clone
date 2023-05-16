@@ -26,6 +26,12 @@ class _UsernameScreenState extends State<UsernameScreen> {
   }
 
   @override
+  void dispose() {
+    _usernameController.dispose();
+    super.dispose(); // 모든 것 뒤에 super.dispose 하는 것이 가장 적절하다고 함 by Nico
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -76,30 +82,46 @@ class _UsernameScreenState extends State<UsernameScreen> {
               ),
             ),
             Gaps.v16,
-            FractionallySizedBox(
-              widthFactor: 1,
-              child: AnimatedContainer(
-                padding: const EdgeInsets.symmetric(
-                  vertical: Sizes.size16,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: _username.isEmpty
-                      ? Colors.grey.shade400
-                      : Theme.of(context).primaryColor,
-                ),
-                duration: const Duration(milliseconds: 300),
-                child: const Text(
-                  'Next',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
+            FormButton(disabled: _username.isEmpty),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class FormButton extends StatelessWidget {
+  const FormButton({
+    super.key,
+    required this.disabled,
+  });
+
+  final bool disabled;
+
+  @override
+  Widget build(BuildContext context) {
+    return FractionallySizedBox(
+      widthFactor: 1,
+      child: AnimatedContainer(
+        padding: const EdgeInsets.symmetric(
+          vertical: Sizes.size16,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color:
+              disabled ? Colors.grey.shade400 : Theme.of(context).primaryColor,
+        ),
+        duration: const Duration(milliseconds: 300),
+        child: AnimatedDefaultTextStyle(
+          duration: const Duration(milliseconds: 300),
+          style: TextStyle(
+            color: disabled ? Colors.white : Colors.grey.shade400,
+            fontWeight: FontWeight.w600,
+          ),
+          child: const Text(
+            'Next',
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );
