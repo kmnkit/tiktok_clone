@@ -14,12 +14,13 @@ class BirthdayScreen extends StatefulWidget {
 class _BirthdayScreenState extends State<BirthdayScreen> {
   final TextEditingController _birthdayController = TextEditingController();
 
-  DateTime initialDate = DateTime.now();
+  DateTime maximumDate = DateTime(
+      DateTime.now().year - 15, DateTime.now().month, DateTime.now().day);
 
   @override
   void initState() {
     super.initState();
-    _setTextFieldDate(initialDate);
+    _setTextFieldDate(maximumDate);
   }
 
   @override
@@ -91,7 +92,9 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
         height: 300,
         child: CupertinoDatePicker(
           mode: CupertinoDatePickerMode.date,
-          initialDateTime: initialDate,
+          initialDateTime: maximumDate,
+          maximumDate: maximumDate,
+          maximumYear: maximumDate.year,
           onDateTimeChanged: _setTextFieldDate,
         ),
       )),
