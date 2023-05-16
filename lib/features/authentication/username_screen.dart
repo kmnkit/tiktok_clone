@@ -26,6 +26,12 @@ class _UsernameScreenState extends State<UsernameScreen> {
   }
 
   @override
+  void dispose() {
+    _usernameController.dispose();
+    super.dispose(); // 모든 것 뒤에 super.dispose 하는 것이 가장 적절하다고 함 by Nico
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -109,7 +115,7 @@ class FormButton extends StatelessWidget {
         child: AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 300),
           style: TextStyle(
-            color: disabled ? Colors.grey.shade400 : Colors.white,
+            color: disabled ? Colors.white : Colors.grey.shade400,
             fontWeight: FontWeight.w600,
           ),
           child: const Text(
