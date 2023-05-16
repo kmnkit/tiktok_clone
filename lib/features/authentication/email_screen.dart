@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/custom_scaffold.dart';
 import 'package:tiktok_clone/features/authentication/password_screen.dart';
 
 class EmailScreen extends StatefulWidget {
@@ -53,60 +54,51 @@ class _EmailScreenState extends State<EmailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: _onScaffoldTap,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "Sign Up",
-          ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Sizes.size36,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Gaps.v40,
-              const Text(
-                "What is your email?",
-                style: TextStyle(
-                  fontSize: Sizes.size24,
-                  fontWeight: FontWeight.w700,
-                ),
+    return CustomScaffold(
+      title: "Sign Up",
+      body: GestureDetector(
+        onTap: _onScaffoldTap,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Gaps.v40,
+            const Text(
+              "What is your email?",
+              style: TextStyle(
+                fontSize: Sizes.size24,
+                fontWeight: FontWeight.w700,
               ),
-              Gaps.v16,
-              TextField(
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
-                autocorrect: false,
-                cursorColor: Theme.of(context).primaryColor,
-                onEditingComplete: _onSubmit,
-                decoration: InputDecoration(
-                  hintText: "Email",
-                  errorText: _isEmailValid(),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.grey.shade400,
-                    ),
+            ),
+            Gaps.v16,
+            TextField(
+              controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
+              autocorrect: false,
+              cursorColor: Theme.of(context).primaryColor,
+              onEditingComplete: _onSubmit,
+              decoration: InputDecoration(
+                hintText: "Email",
+                errorText: _isEmailValid(),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade400,
                   ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.grey.shade400,
-                    ),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade400,
                   ),
                 ),
               ),
-              Gaps.v16,
-              GestureDetector(
-                onTap: _onSubmit,
-                child: FormButton(
-                  disabled: _email.isEmpty || _isEmailValid() != null,
-                ),
+            ),
+            Gaps.v16,
+            GestureDetector(
+              onTap: _onSubmit,
+              child: FormButton(
+                disabled: _email.isEmpty || _isEmailValid() != null,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
