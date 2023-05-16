@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/custom_scaffold.dart';
 import 'package:tiktok_clone/features/authentication/birthday_screen.dart';
+import 'package:tiktok_clone/features/authentication/widgets/custom_form_button.dart';
 
 class PasswordScreen extends StatefulWidget {
   const PasswordScreen({super.key});
@@ -52,102 +54,93 @@ class _PasswordScreenState extends State<PasswordScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: _onScaffoldTap,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "Sign Up",
-          ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Sizes.size36,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Gaps.v40,
-              const Text(
-                "Password",
-                style: TextStyle(
-                  fontSize: Sizes.size24,
-                  fontWeight: FontWeight.w700,
-                ),
+      child: CustomScaffold(
+        title: "Sign Up",
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Gaps.v40,
+            const Text(
+              "Password",
+              style: TextStyle(
+                fontSize: Sizes.size24,
+                fontWeight: FontWeight.w700,
               ),
-              Gaps.v16,
-              TextField(
-                controller: _passwordController,
-                obscureText: _obsequreText,
-                autocorrect: false,
-                cursorColor: Theme.of(context).primaryColor,
-                onEditingComplete: _onSubmit,
-                decoration: InputDecoration(
-                  suffix: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      GestureDetector(
-                        onTap: _onClearTap,
-                        child: FaIcon(
-                          FontAwesomeIcons.solidCircleXmark,
-                          color: Theme.of(context).primaryColor,
-                          size: Sizes.size20,
-                        ),
+            ),
+            Gaps.v16,
+            TextField(
+              controller: _passwordController,
+              obscureText: _obsequreText,
+              autocorrect: false,
+              cursorColor: Theme.of(context).primaryColor,
+              onEditingComplete: _onSubmit,
+              decoration: InputDecoration(
+                suffix: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    GestureDetector(
+                      onTap: _onClearTap,
+                      child: FaIcon(
+                        FontAwesomeIcons.solidCircleXmark,
+                        color: Theme.of(context).primaryColor,
+                        size: Sizes.size20,
                       ),
-                      Gaps.h12,
-                      GestureDetector(
-                        onTap: _toggleObsecureText,
-                        child: FaIcon(
-                          _obsequreText
-                              ? FontAwesomeIcons.eye
-                              : FontAwesomeIcons.eyeSlash,
-                          color: Theme.of(context).primaryColor,
-                          size: Sizes.size20,
-                        ),
+                    ),
+                    Gaps.h12,
+                    GestureDetector(
+                      onTap: _toggleObsecureText,
+                      child: FaIcon(
+                        _obsequreText
+                            ? FontAwesomeIcons.eye
+                            : FontAwesomeIcons.eyeSlash,
+                        color: Theme.of(context).primaryColor,
+                        size: Sizes.size20,
                       ),
-                    ],
-                  ),
-                  hintText: "Make it strong!",
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.grey.shade400,
                     ),
+                  ],
+                ),
+                hintText: "Make it strong!",
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade400,
                   ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.grey.shade400,
-                    ),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade400,
                   ),
                 ),
               ),
-              Gaps.v10,
-              const Text(
-                "Your password must have:",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
+            ),
+            Gaps.v10,
+            const Text(
+              "Your password must have:",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Gaps.v10,
+            Row(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.circleCheck,
+                  size: Sizes.size20,
+                  color: _isPasswordValid()
+                      ? Theme.of(context).primaryColor
+                      : Colors.grey.shade400,
                 ),
+                Gaps.h5,
+                const Text('8 to 20 characters')
+              ],
+            ),
+            Gaps.v16,
+            GestureDetector(
+              onTap: _onSubmit,
+              child: CustomFormButton(
+                disabled: !_isPasswordValid(),
               ),
-              Gaps.v10,
-              Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.circleCheck,
-                    size: Sizes.size20,
-                    color: _isPasswordValid()
-                        ? Theme.of(context).primaryColor
-                        : Colors.grey.shade400,
-                  ),
-                  Gaps.h5,
-                  const Text('8 to 20 characters')
-                ],
-              ),
-              Gaps.v16,
-              GestureDetector(
-                onTap: _onSubmit,
-                child: FormButton(
-                  disabled: !_isPasswordValid(),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -160,46 +153,5 @@ class _PasswordScreenState extends State<PasswordScreen> {
   void _toggleObsecureText() {
     _obsequreText = !_obsequreText;
     setState(() {});
-  }
-}
-
-class FormButton extends StatelessWidget {
-  const FormButton({
-    super.key,
-    required this.disabled,
-  });
-
-  final bool disabled;
-  final Duration animationDuration =
-      const Duration(milliseconds: 300); // milliseconds
-
-  @override
-  Widget build(BuildContext context) {
-    return FractionallySizedBox(
-      widthFactor: 1,
-      child: AnimatedContainer(
-        padding: const EdgeInsets.symmetric(
-          vertical: Sizes.size16,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: disabled
-              ? Theme.of(context).disabledColor
-              : Theme.of(context).primaryColor,
-        ),
-        duration: animationDuration,
-        child: AnimatedDefaultTextStyle(
-          duration: animationDuration,
-          style: TextStyle(
-            color: disabled ? Colors.white : Theme.of(context).disabledColor,
-            fontWeight: FontWeight.w600,
-          ),
-          child: const Text(
-            'Next',
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
-    );
   }
 }
