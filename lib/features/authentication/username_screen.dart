@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/authentication/email_screen.dart';
 
 class UsernameScreen extends StatefulWidget {
   const UsernameScreen({super.key});
@@ -82,9 +83,22 @@ class _UsernameScreenState extends State<UsernameScreen> {
               ),
             ),
             Gaps.v16,
-            FormButton(disabled: _username.isEmpty),
+            GestureDetector(
+                onTap: _onNextTap,
+                child: FormButton(disabled: _username.isEmpty)),
           ],
         ),
+      ),
+    );
+  }
+
+  void _onNextTap() {
+    // StatefulWidget 안의 State 안에 있으면 어디서든 context를 사용 가능하므로
+    // 이 method는 Context 안 받아도 됨
+    if (_username.isEmpty) return;
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const EmailScreen(),
       ),
     );
   }
