@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/custom_scaffold.dart';
+import 'package:tiktok_clone/features/authentication/widgets/custom_form_button.dart';
 
 class LoginFormScreen extends StatefulWidget {
   const LoginFormScreen({super.key});
@@ -11,12 +13,23 @@ class LoginFormScreen extends StatefulWidget {
 class _LoginFormScreenState extends State<LoginFormScreen> {
   @override
   Widget build(BuildContext context) {
-    return const CustomScaffold(
+    return CustomScaffold(
       title: 'Log In',
-      body: SizedBox(
-        width: 200,
+      body: Form(
+        child: Column(
+          children: [
+            const TextField(),
+            Gaps.v16,
+            const TextField(),
+            Gaps.v28,
+            CustomFormButton(
+              disabled: false,
+              abledColor: Colors.amber.shade500,
+            ),
+          ],
+        ),
       ),
-      bottomAppBar: BottomAppBar(),
+      bottomAppBar: const BottomAppBar(),
     );
   }
 }

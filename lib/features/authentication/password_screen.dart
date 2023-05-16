@@ -4,6 +4,7 @@ import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/custom_scaffold.dart';
 import 'package:tiktok_clone/features/authentication/birthday_screen.dart';
+import 'package:tiktok_clone/features/authentication/widgets/custom_form_button.dart';
 
 class PasswordScreen extends StatefulWidget {
   const PasswordScreen({super.key});
@@ -135,7 +136,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
             Gaps.v16,
             GestureDetector(
               onTap: _onSubmit,
-              child: FormButton(
+              child: CustomFormButton(
                 disabled: !_isPasswordValid(),
               ),
             ),
@@ -152,46 +153,5 @@ class _PasswordScreenState extends State<PasswordScreen> {
   void _toggleObsecureText() {
     _obsequreText = !_obsequreText;
     setState(() {});
-  }
-}
-
-class FormButton extends StatelessWidget {
-  const FormButton({
-    super.key,
-    required this.disabled,
-  });
-
-  final bool disabled;
-  final Duration animationDuration =
-      const Duration(milliseconds: 300); // milliseconds
-
-  @override
-  Widget build(BuildContext context) {
-    return FractionallySizedBox(
-      widthFactor: 1,
-      child: AnimatedContainer(
-        padding: const EdgeInsets.symmetric(
-          vertical: Sizes.size16,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: disabled
-              ? Theme.of(context).disabledColor
-              : Theme.of(context).primaryColor,
-        ),
-        duration: animationDuration,
-        child: AnimatedDefaultTextStyle(
-          duration: animationDuration,
-          style: TextStyle(
-            color: disabled ? Colors.white : Theme.of(context).disabledColor,
-            fontWeight: FontWeight.w600,
-          ),
-          child: const Text(
-            'Next',
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
-    );
   }
 }

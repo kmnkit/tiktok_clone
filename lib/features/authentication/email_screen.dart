@@ -3,6 +3,7 @@ import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/custom_scaffold.dart';
 import 'package:tiktok_clone/features/authentication/password_screen.dart';
+import 'package:tiktok_clone/features/authentication/widgets/custom_form_button.dart';
 
 class EmailScreen extends StatefulWidget {
   const EmailScreen({super.key});
@@ -94,7 +95,7 @@ class _EmailScreenState extends State<EmailScreen> {
             Gaps.v16,
             GestureDetector(
               onTap: _onSubmit,
-              child: FormButton(
+              child: CustomFormButton(
                 disabled: _email.isEmpty || _isEmailValid() != null,
               ),
             ),
@@ -105,43 +106,4 @@ class _EmailScreenState extends State<EmailScreen> {
   }
 
   void _onScaffoldTap() => FocusScope.of(context).unfocus();
-}
-
-class FormButton extends StatelessWidget {
-  const FormButton({
-    super.key,
-    required this.disabled,
-  });
-
-  final bool disabled;
-
-  @override
-  Widget build(BuildContext context) {
-    return FractionallySizedBox(
-      widthFactor: 1,
-      child: AnimatedContainer(
-        padding: const EdgeInsets.symmetric(
-          vertical: Sizes.size16,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: disabled
-              ? Theme.of(context).disabledColor
-              : Theme.of(context).primaryColor,
-        ),
-        duration: const Duration(milliseconds: 300),
-        child: AnimatedDefaultTextStyle(
-          duration: const Duration(milliseconds: 300),
-          style: TextStyle(
-            color: disabled ? Colors.white : Theme.of(context).disabledColor,
-            fontWeight: FontWeight.w600,
-          ),
-          child: const Text(
-            'Next',
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
-    );
-  }
 }
