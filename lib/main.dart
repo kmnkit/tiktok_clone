@@ -12,6 +12,7 @@ class TikTokApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'TikTok Clone',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
@@ -24,8 +25,12 @@ class TikTokApp extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
+        bottomAppBarTheme: BottomAppBarTheme(
+          color: Colors.grey.shade50,
+        ),
         primaryColor: const Color(0xFFe9435A),
         scaffoldBackgroundColor: Colors.white,
+        disabledColor: Colors.grey.shade400,
       ),
       home: const SignUpScreen(),
       // Scaffold에 Text 관련 주요 설정들이 있어서 Scaffold가 없으면 다 깨질 수 있음.

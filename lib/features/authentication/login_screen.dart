@@ -2,65 +2,64 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/custom_scaffold.dart';
+import 'package:tiktok_clone/features/authentication/login_form_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 
 class LogInScreen extends StatelessWidget {
   const LogInScreen({super.key});
 
   void onSignupTap(BuildContext context) => Navigator.of(context).pop();
+  void _onEmailLoginTap(BuildContext context) => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const LoginFormScreen(),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Sizes.size40,
+    return CustomScaffold(
+      title: "Log In",
+      body: Column(
+        children: [
+          Gaps.v80,
+          const Text(
+            'Log in to TikTok',
+            style: TextStyle(
+              fontSize: Sizes.size24,
+              fontWeight: FontWeight.w700,
+            ),
           ),
-          child: Column(
-            children: [
-              Gaps.v80,
-              const Text(
-                'Log in to TikTok',
-                style: TextStyle(
-                  fontSize: Sizes.size24,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              Gaps.v20,
-              const Text(
-                "Manage your account, check notifications, comment on videos, and more.",
-                style: TextStyle(
-                  fontSize: Sizes.size16,
-                  color: Colors.black45,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              Gaps.v40,
-              AuthButton(
-                func: (context) {
-                  print('Email Auth Button Pressed');
-                },
-                icon: const FaIcon(
-                  FontAwesomeIcons.user,
-                ),
-                text: "Use email & password",
-              ),
-              Gaps.v16,
-              AuthButton(
-                func: (context) {
-                  print('Apple Auth Button Pressed');
-                },
-                icon: const FaIcon(
-                  FontAwesomeIcons.apple,
-                ),
-                text: "Continue with Apple",
-              )
-            ],
+          Gaps.v20,
+          const Text(
+            "Manage your account, check notifications, comment on videos, and more.",
+            style: TextStyle(
+              fontSize: Sizes.size16,
+              color: Colors.black45,
+            ),
+            textAlign: TextAlign.center,
           ),
-        ),
+          Gaps.v40,
+          AuthButton(
+            func: _onEmailLoginTap,
+            icon: const FaIcon(
+              FontAwesomeIcons.user,
+            ),
+            text: "Use email & password",
+          ),
+          Gaps.v16,
+          AuthButton(
+            func: (context) {
+              print('Apple Auth Button Pressed');
+            },
+            icon: const FaIcon(
+              FontAwesomeIcons.apple,
+            ),
+            text: "Continue with Apple",
+          )
+        ],
       ),
-      bottomNavigationBar: BottomAppBar(
+      bottomAppBar: BottomAppBar(
         color: Colors.grey.shade100,
         elevation: 2,
         child: Padding(

@@ -1,37 +1,49 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/custom_scaffold.dart';
-import 'package:tiktok_clone/features/authentication/email_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/custom_form_button.dart';
+import 'package:tiktok_clone/features/onboarding/interests_screen.dart';
 
-class UsernameScreen extends StatefulWidget {
-  const UsernameScreen({super.key});
+class BirthdayScreen extends StatefulWidget {
+  const BirthdayScreen({super.key});
 
   @override
-  State<UsernameScreen> createState() => _UsernameScreenState();
+  State<BirthdayScreen> createState() => _BirthdayScreenState();
 }
 
-class _UsernameScreenState extends State<UsernameScreen> {
-  final TextEditingController _usernameController = TextEditingController();
+class _BirthdayScreenState extends State<BirthdayScreen> {
+  final TextEditingController _birthdayController = TextEditingController();
 
-  String _username = "";
+  DateTime maximumDate = DateTime(
+      DateTime.now().year - 15, DateTime.now().month, DateTime.now().day);
 
   @override
   void initState() {
     super.initState();
-
-    _usernameController.addListener(() {
-      setState(() {
-        _username = _usernameController.text;
-      });
-    });
+    _setTextFieldDate(maximumDate);
   }
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _birthdayController.dispose();
     super.dispose(); // 모든 것 뒤에 super.dispose 하는 것이 가장 적절하다고 함 by Nico
+  }
+
+  void _onNextTap() {
+    // StatefulWidget 안의 State 안에 있으면 어디서든 context를 사용 가능하므로
+    // 이 method는 Context 안 받아도 됨
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const InterestsScreen(),
+      ),
+    );
+  }
+
+  void _setTextFieldDate(DateTime date) {
+    final textDate = date.toString().split(" ").first;
+    _birthdayController.value = TextEditingValue(text: textDate);
   }
 
   @override
@@ -43,7 +55,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
         children: [
           Gaps.v40,
           const Text(
-            "Create Username",
+            "When is your birthday?",
             style: TextStyle(
               fontSize: Sizes.size24,
               fontWeight: FontWeight.w700,
@@ -51,7 +63,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
           ),
           Gaps.v8,
           const Text(
-            "You can always change this later.",
+            "Your birthday won't be shown publicly.",
             style: TextStyle(
               fontSize: Sizes.size16,
               color: Colors.black54,
@@ -59,10 +71,9 @@ class _UsernameScreenState extends State<UsernameScreen> {
           ),
           Gaps.v16,
           TextField(
-            controller: _usernameController,
-            cursorColor: Theme.of(context).primaryColor,
+            enabled: false,
+            controller: _birthdayController,
             decoration: InputDecoration(
-              hintText: "Username",
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(
                   color: Theme.of(context).disabledColor,
@@ -80,23 +91,23 @@ class _UsernameScreenState extends State<UsernameScreen> {
             onTap: _onNextTap,
             child: CustomFormButton(
               abledColor: Theme.of(context).primaryColor,
-              disabled: _username.isEmpty,
-              text: 'Next',
+              disabled: false,
+              text: "Next",
             ),
           ),
         ],
       ),
-    );
-  }
-
-  void _onNextTap() {
-    // StatefulWidget 안의 State 안에 있으면 어디서든 context를 사용 가능하므로
-    // 이 method는 Context 안 받아도 됨
-    if (_username.isEmpty) return;
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const EmailScreen(),
-      ),
+      bottomAppBar: BottomAppBar(
+          child: SizedBox(
+        height: 300,
+        child: CupertinoDatePicker(
+          mode: CupertinoDatePickerMode.date,
+          initialDateTime: maximumDate,
+          maximumDate: maximumDate,
+          maximumYear: maximumDate.year,
+          onDateTimeChanged: _setTextFieldDate,
+        ),
+      )),
     );
   }
 }
