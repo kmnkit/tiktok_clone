@@ -35,7 +35,6 @@ class _UsernameScreenState extends State<UsernameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
           "Sign Up",
@@ -72,12 +71,12 @@ class _UsernameScreenState extends State<UsernameScreen> {
                 hintText: "Username",
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).disabledColor,
                   ),
                 ),
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).disabledColor,
                   ),
                 ),
               ),
@@ -122,14 +121,15 @@ class FormButton extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color:
-              disabled ? Colors.grey.shade400 : Theme.of(context).primaryColor,
+          color: disabled
+              ? Theme.of(context).disabledColor
+              : Theme.of(context).primaryColor,
         ),
         duration: const Duration(milliseconds: 300),
         child: AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 300),
           style: TextStyle(
-            color: disabled ? Colors.white : Colors.grey.shade400,
+            color: disabled ? Colors.white : Theme.of(context).disabledColor,
             fontWeight: FontWeight.w600,
           ),
           child: const Text(
