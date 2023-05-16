@@ -53,7 +53,6 @@ class _PasswordScreenState extends State<PasswordScreen> {
     return GestureDetector(
       onTap: _onScaffoldTap,
       child: Scaffold(
-        backgroundColor: Colors.white,
         appBar: AppBar(
           title: const Text(
             "Sign Up",
@@ -171,6 +170,8 @@ class FormButton extends StatelessWidget {
   });
 
   final bool disabled;
+  final Duration animationDuration =
+      const Duration(milliseconds: 300); // milliseconds
 
   @override
   Widget build(BuildContext context) {
@@ -182,14 +183,15 @@ class FormButton extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color:
-              disabled ? Colors.grey.shade400 : Theme.of(context).primaryColor,
+          color: disabled
+              ? Theme.of(context).disabledColor
+              : Theme.of(context).primaryColor,
         ),
-        duration: const Duration(milliseconds: 300),
+        duration: animationDuration,
         child: AnimatedDefaultTextStyle(
-          duration: const Duration(milliseconds: 300),
+          duration: animationDuration,
           style: TextStyle(
-            color: disabled ? Colors.white : Colors.grey.shade400,
+            color: disabled ? Colors.white : Theme.of(context).disabledColor,
             fontWeight: FontWeight.w600,
           ),
           child: const Text(
