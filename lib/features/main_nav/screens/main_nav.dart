@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/main_nav/screens/stateful.dart';
 import 'package:tiktok_clone/features/main_nav/widgets/nav_tab.dart';
 
 class MainNavigationScreen extends StatefulWidget {
@@ -14,12 +15,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
 
   final screens = [
-    const Center(
-      child: Text('Home'),
-    ),
-    const Center(
-      child: Text('Search'),
-    ),
+    StatefulScreen(key: GlobalKey()),
+    StatefulScreen(key: GlobalKey()),
+    Container(),
+    StatefulScreen(key: GlobalKey()),
+    StatefulScreen(key: GlobalKey()),
   ];
 
   void _onTap(int index) {
@@ -31,6 +31,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: screens.elementAt(_selectedIndex),
       bottomNavigationBar: BottomAppBar(
         color: Colors.black,
         child: Padding(
