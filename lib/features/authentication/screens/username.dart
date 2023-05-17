@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/custom_scaffold.dart';
-import 'package:tiktok_clone/features/authentication/email_screen.dart';
+import 'package:tiktok_clone/features/authentication/screens/email.dart';
 import 'package:tiktok_clone/features/authentication/widgets/custom_form_button.dart';
 
 class UsernameScreen extends StatefulWidget {
