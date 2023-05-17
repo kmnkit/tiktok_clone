@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/custom_scaffold.dart';
 
 enum Direction { right, left }
 
@@ -47,61 +48,56 @@ class _TutorialScreenState extends State<TutorialScreen> {
     return GestureDetector(
       onPanUpdate: _onPanUpdate,
       onPanEnd: _onPanEnd,
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Sizes.size24,
-          ),
-          child: SafeArea(
-            child: AnimatedCrossFade(
-              duration: const Duration(milliseconds: 300),
-              crossFadeState: _showingPage == Page.first
-                  ? CrossFadeState.showFirst
-                  : CrossFadeState.showSecond,
-              firstChild: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Gaps.v80,
-                  Text(
-                    'ようこそ!',
-                    style: TextStyle(
-                      fontSize: Sizes.size40,
-                      fontWeight: FontWeight.bold,
-                    ),
+      child: CustomScaffold(
+        body: SafeArea(
+          child: AnimatedCrossFade(
+            duration: const Duration(milliseconds: 300),
+            crossFadeState: _showingPage == Page.first
+                ? CrossFadeState.showFirst
+                : CrossFadeState.showSecond,
+            firstChild: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Gaps.v80,
+                Text(
+                  'ようこそ!',
+                  style: TextStyle(
+                    fontSize: Sizes.size40,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Gaps.v16,
-                  Text(
-                    'あなたの興味に合わせたビデオが用意されています。シェアしてみんなで楽しみましょう!',
-                    style: TextStyle(
-                      fontSize: Sizes.size20,
-                    ),
+                ),
+                Gaps.v16,
+                Text(
+                  'あなたの興味に合わせたビデオが用意されています。シェアしてみんなで楽しみましょう!',
+                  style: TextStyle(
+                    fontSize: Sizes.size20,
                   ),
-                ],
-              ),
-              secondChild: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Gaps.v80,
-                  Text(
-                    'Follow the rules!',
-                    style: TextStyle(
-                      fontSize: Sizes.size40,
-                      fontWeight: FontWeight.bold,
-                    ),
+                ),
+              ],
+            ),
+            secondChild: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Gaps.v80,
+                Text(
+                  'Follow the rules!',
+                  style: TextStyle(
+                    fontSize: Sizes.size40,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Gaps.v16,
-                  Text(
-                    '毎日をTiktokとともに楽しみましょう',
-                    style: TextStyle(
-                      fontSize: Sizes.size20,
-                    ),
+                ),
+                Gaps.v16,
+                Text(
+                  '毎日をTiktokとともに楽しみましょう',
+                  style: TextStyle(
+                    fontSize: Sizes.size20,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
-        bottomNavigationBar: BottomAppBar(
+        bottomAppBar: BottomAppBar(
           padding: const EdgeInsets.symmetric(
             vertical: Sizes.size24,
             horizontal: Sizes.size24,
