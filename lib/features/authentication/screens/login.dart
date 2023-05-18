@@ -49,9 +49,7 @@ class LogInScreen extends StatelessWidget {
           ),
           Gaps.v16,
           AuthButton(
-            func: (context) {
-              print('Apple Auth Button Pressed');
-            },
+            func: (context) {},
             icon: const FaIcon(
               FontAwesomeIcons.apple,
             ),
