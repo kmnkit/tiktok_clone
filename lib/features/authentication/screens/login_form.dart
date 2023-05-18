@@ -43,9 +43,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
               validator: (value) {
                 return null;
               },
-              onSaved: (newValue) {
-                print(newValue);
-              },
+              onSaved: (newValue) {},
             ),
             Gaps.v16,
             TextFormField(
