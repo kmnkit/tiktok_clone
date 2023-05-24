@@ -46,7 +46,7 @@ class _DescriptionState extends State<Description> {
             child: GestureDetector(
               onTap: _shortenDescription,
               child: Text(
-                shortened ? 'See More' : 'Shortened',
+                shortened ? 'See More' : 'Shorten',
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
