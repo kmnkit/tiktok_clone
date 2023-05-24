@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/videos/widgets/video_description.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -19,8 +21,9 @@ class VideoPost extends StatefulWidget {
 
 class _VideoPostState extends State<VideoPost>
     with SingleTickerProviderStateMixin {
-  final VideoPlayerController _videoPlayerController =
-      VideoPlayerController.asset("assets/videos/video.mp4");
+  // with를 사용한다는 건 이 클래스를 복사한다는 뜻.
+  late final VideoPlayerController _videoPlayerController;
+
   bool _isPaused = false;
   final Duration _animationDuration = const Duration(milliseconds: 200);
   late final AnimationController _animationController;
@@ -35,9 +38,12 @@ class _VideoPostState extends State<VideoPost>
   }
 
   void _initVideoPlayer() async {
+    _videoPlayerController =
+        VideoPlayerController.asset("assets/videos/video.mp4");
     await _videoPlayerController.initialize();
-    setState(() {});
+    await _videoPlayerController.setLooping(true);
     _videoPlayerController.addListener(_onVideoChange);
+    setState(() {});
   }
 
   @override
@@ -45,7 +51,8 @@ class _VideoPostState extends State<VideoPost>
     super.initState();
     _initVideoPlayer();
     _animationController = AnimationController(
-      vsync: this,
+      vsync:
+          this, // vsync는 offscreen 애니메이션의 불필요한 리소스 사용을 막는다. -> 위젯이 안 보일 때는 애니메이션이 작동하지 않도록 함
       lowerBound: 1.0,
       upperBound: 1.5,
       value: 1.5,
@@ -121,6 +128,28 @@ class _VideoPostState extends State<VideoPost>
                   ),
                 ),
               ),
+            ),
+          ),
+          const Positioned(
+            bottom: 20,
+            left: 10,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "@니꼬",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: Sizes.size20,
+                  ),
+                ),
+                Gaps.v10,
+                Description(
+                  text:
+                      'In the vast expanse of the night sky, a solitary star sparkles with an ethereal brilliance, casting its luminous glow upon the world, a beacon of hope and inspiration.',
+                ),
+              ],
             ),
           ),
         ],
