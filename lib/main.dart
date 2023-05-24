@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/features/authentication/sign_up_screen.dart';
+import 'package:tiktok_clone/features/main_nav/screens/main_nav.dart';
 
 void main() {
   runApp(const TikTokApp());
@@ -32,7 +32,7 @@ class TikTokApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         disabledColor: Colors.grey.shade400,
       ),
-      home: const SignUpScreen(),
+      home: const MainNavigationScreen(),
       // Scaffold에 Text 관련 주요 설정들이 있어서 Scaffold가 없으면 다 깨질 수 있음.
     );
   }
