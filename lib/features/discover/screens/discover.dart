@@ -125,7 +125,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
-                fillColor: Colors.amber.shade200,
+                fillColor: Colors.grey.shade200,
                 prefixIconColor: Theme.of(context).primaryColor,
                 prefixIcon: const Padding(
                   padding: EdgeInsets.only(
