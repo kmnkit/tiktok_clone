@@ -10,9 +10,17 @@ class ChatDetailScreen extends StatefulWidget {
   State<ChatDetailScreen> createState() => _ChatDetailScreenState();
 }
 
-class _ChatDetailScreenState extends State<ChatDetailScreen> {
+class _ChatDetailScreenState extends State<ChatDetailScreen>
+    with SingleTickerProviderStateMixin {
   late final TextEditingController _textEditingController =
       TextEditingController();
+
+  late final AnimationController _animationController = AnimationController(
+    vsync: this,
+    duration: const Duration(
+      seconds: 2,
+    ),
+  )..repeat(reverse: true);
 
   String _message = "";
   bool _isWriting = false;
@@ -52,6 +60,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
   @override
   void dispose() {
     _textEditingController.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -76,17 +85,20 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                 Positioned(
                   right: 0,
                   bottom: 0,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.white,
-                        width: Sizes.size3,
+                  child: FadeTransition(
+                    opacity: _animationController,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.white,
+                          width: Sizes.size3,
+                        ),
+                        color: Colors.green.shade300,
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                      color: Colors.green.shade300,
-                      borderRadius: BorderRadius.circular(15),
+                      width: Sizes.size20,
+                      height: Sizes.size20,
                     ),
-                    width: Sizes.size20,
-                    height: Sizes.size20,
                   ),
                 ),
               ],
