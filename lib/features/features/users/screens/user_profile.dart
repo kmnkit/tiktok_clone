@@ -30,9 +30,22 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             ],
           ),
           floating: true,
+          snap: true,
           stretch: true,
-          pinned: true,
+          // pinned: true, // 배경색과 flexible space bar의 title 보여줌
         ),
+        SliverFixedExtentList(
+            delegate: SliverChildBuilderDelegate(
+              childCount: 50,
+              (context, index) => Container(
+                color: Colors.amber[100 * (index % 9)],
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text("Item $index"),
+                ),
+              ),
+            ),
+            itemExtent: 80)
       ],
     );
   }
