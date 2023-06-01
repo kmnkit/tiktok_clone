@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/discover/screens/discover.dart';
+import 'package:tiktok_clone/features/features/users/screens/user_profile.dart';
 import 'package:tiktok_clone/features/inbox/screens/inbox.dart';
 import 'package:tiktok_clone/features/main_nav/widgets/nav_tab.dart';
 import 'package:tiktok_clone/features/main_nav/widgets/post_video_button.dart';
@@ -16,7 +17,7 @@ class MainNavigationScreen extends StatefulWidget {
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _selectedIndex = 3;
+  int _selectedIndex = 4;
 
   void _onTap(int index) {
     setState(() {
@@ -58,7 +59,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _selectedIndex != 4,
-            child: Container(),
+            child: const UserProfileScreen(),
           ),
         ],
       ),
