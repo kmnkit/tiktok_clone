@@ -11,6 +11,7 @@ class UserProfileScreen extends StatefulWidget {
 class _UserProfileScreenState extends State<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    // Slivers are scrollable
     return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -32,9 +33,19 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           ),
           // floating: true,
           // snap: true,
-          pinned: true,
+          // pinned: true,
           stretch: true,
           // pinned: true, // 배경색과 flexible space bar의 title 보여줌
+        ),
+        const SliverToBoxAdapter(
+          child: Column(
+            children: [
+              CircleAvatar(
+                backgroundColor: Colors.indigo,
+                radius: 20,
+              )
+            ],
+          ),
         ),
         SliverFixedExtentList(
             delegate: SliverChildBuilderDelegate(
@@ -48,6 +59,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ),
             ),
             itemExtent: 80),
+        SliverPersistentHeader(
+          delegate: CustomDelegate(),
+          pinned: true,
+        ),
         SliverGrid(
           delegate: SliverChildBuilderDelegate(
             childCount: 30,
@@ -68,5 +83,39 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         )
       ],
     );
+  }
+}
+
+class CustomDelegate extends SliverPersistentHeaderDelegate {
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      color: Colors.indigo,
+      child: FractionallySizedBox(
+        key: UniqueKey(),
+        heightFactor: 1,
+        child: const Center(
+          child: Text(
+            'Title!',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  double get maxExtent => 70; // max height
+
+  @override
+  double get minExtent => 30; // min height
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    // flutter에게 보여져야 하는지 알려주는 메소드
+    return false; // Just for now
   }
 }
