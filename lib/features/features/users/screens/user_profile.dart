@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/features/users/widgets/persistent_tabbar.dart';
+import 'package:tiktok_clone/features/settings/screens/settings.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});
@@ -12,6 +13,14 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
+  void _onGearPressed() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const SettingsScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // Slivers are scrollable
@@ -25,7 +34,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 title: const Text('MARCO'),
                 actions: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: _onGearPressed,
                     icon: const FaIcon(
                       FontAwesomeIcons.gear,
                       size: Sizes.size20,
@@ -92,27 +101,46 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       ),
                     ),
                     Gaps.v14,
-                    FractionallySizedBox(
-                      widthFactor: 0.33,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: Sizes.size12,
-                        ),
-                        decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(
-                                Sizes.size4,
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 50,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 3,
+                            child: Container(
+                              height: 50,
+                              padding: const EdgeInsets.symmetric(
+                                vertical: Sizes.size12,
                               ),
-                            )),
-                        child: const Text(
-                          'Follow',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).primaryColor,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(
+                                    Sizes.size4,
+                                  ),
+                                ),
+                              ),
+                              child: const Text(
+                                'Follow',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
                           ),
-                          textAlign: TextAlign.center,
-                        ),
+                          Gaps.h4,
+                          const ProfileAdditionalButton(
+                            icon: FontAwesomeIcons.youtube,
+                          ),
+                          Gaps.h4,
+                          const ProfileAdditionalButton(
+                            icon: FontAwesomeIcons.caretDown,
+                          ),
+                        ],
                       ),
                     ),
                     Gaps.v14,
@@ -190,6 +218,35 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class ProfileAdditionalButton extends StatelessWidget {
+  final IconData icon;
+  const ProfileAdditionalButton({
+    super.key,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FractionallySizedBox(
+      heightFactor: 1,
+      child: Container(
+        width: 50,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black12,
+          ),
+          color: Colors.white,
+        ),
+        child: FaIcon(
+          icon,
+          size: Sizes.size20,
         ),
       ),
     );
