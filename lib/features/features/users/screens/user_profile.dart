@@ -102,13 +102,14 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     ),
                     Gaps.v14,
                     SizedBox(
-                      width: MediaQuery.of(context).size.width,
+                      width: MediaQuery.sizeOf(context)
+                          .width, //MediaQuery.sizeOf(context).width,
                       height: 50,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
-                            width: MediaQuery.of(context).size.width / 3,
+                            width: MediaQuery.sizeOf(context).width / 3,
                             child: Container(
                               height: 50,
                               padding: const EdgeInsets.symmetric(
@@ -181,14 +182,13 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             ];
           },
           body: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).height,
             child: TabBarView(
               children: [
                 GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
-                  keyboardDismissBehavior:
-                      ScrollViewKeyboardDismissBehavior.onDrag,
+                  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     crossAxisSpacing: Sizes.size2,
