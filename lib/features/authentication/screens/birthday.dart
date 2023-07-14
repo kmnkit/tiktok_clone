@@ -17,7 +17,10 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   final TextEditingController _birthdayController = TextEditingController();
 
   DateTime maximumDate = DateTime(
-      DateTime.now().year - 15, DateTime.now().month, DateTime.now().day);
+    DateTime.now().year - 15,
+    DateTime.now().month,
+    DateTime.now().day,
+  );
 
   @override
   void initState() {
@@ -34,7 +37,8 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   void _onNextTap() {
     // StatefulWidget 안의 State 안에 있으면 어디서든 context를 사용 가능하므로
     // 이 method는 Context 안 받아도 됨
-    Navigator.of(context).pushAndRemoveUntil(
+    Navigator.pushAndRemoveUntil(
+      context,
       MaterialPageRoute(
         builder: (context) => const InterestsScreen(),
       ),
