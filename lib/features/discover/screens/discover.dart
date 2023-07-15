@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/constants/breakpoints.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
@@ -81,6 +82,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
     return DefaultTabController(
       length: tabs.length,
       child: GestureDetector(
@@ -110,48 +112,53 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                   ),
               ],
             ),
-            title: TextField(
-              // Code Challenge 2: A Customized TextField as a replacement for CupertinoSearchTextField
-              onTap: _startEditing,
-              autocorrect: false,
-              controller: _textEditingController,
-              onEditingComplete: _onSearchSubmitted,
-              textAlignVertical: TextAlignVertical.center,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                    Sizes.size12,
-                  ),
-                  borderSide: BorderSide.none,
-                ),
-                filled: true,
-                fillColor: Colors.grey.shade200,
-                prefixIconColor: Theme.of(context).primaryColor,
-                prefixIcon: const Padding(
-                  padding: EdgeInsets.only(
-                    left: Sizes.size12,
-                    top: Sizes.size12,
-                  ),
-                  child: FaIcon(
-                    FontAwesomeIcons.magnifyingGlass,
-                  ),
-                ),
-                suffixIcon: _isWriting
-                    ? Padding(
-                        padding: const EdgeInsets.only(
-                          top: Sizes.size12,
-                        ),
-                        child: GestureDetector(
-                          onTap: _clearSearchText,
-                          child: FaIcon(
-                            FontAwesomeIcons.circleXmark,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                      )
-                    : null,
+            title: ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: Breakpoints.sm,
               ),
-              textCapitalization: TextCapitalization.none,
+              child: TextField(
+                // Code Challenge 2: A Customized TextField as a replacement for CupertinoSearchTextField
+                onTap: _startEditing,
+                autocorrect: false,
+                controller: _textEditingController,
+                onEditingComplete: _onSearchSubmitted,
+                textAlignVertical: TextAlignVertical.center,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      Sizes.size12,
+                    ),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey.shade200,
+                  prefixIconColor: Theme.of(context).primaryColor,
+                  prefixIcon: const Padding(
+                    padding: EdgeInsets.only(
+                      left: Sizes.size12,
+                      top: Sizes.size12,
+                    ),
+                    child: FaIcon(
+                      FontAwesomeIcons.magnifyingGlass,
+                    ),
+                  ),
+                  suffixIcon: _isWriting
+                      ? Padding(
+                          padding: const EdgeInsets.only(
+                            top: Sizes.size12,
+                          ),
+                          child: GestureDetector(
+                            onTap: _clearSearchText,
+                            child: FaIcon(
+                              FontAwesomeIcons.circleXmark,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                        )
+                      : null,
+                ),
+                textCapitalization: TextCapitalization.none,
+              ),
             ),
           ),
           body: TabBarView(
@@ -163,77 +170,81 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                 padding: const EdgeInsets.all(
                   Sizes.size6,
                 ),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: width > Breakpoints.lg ? 5 : 2,
                   crossAxisSpacing: Sizes.size10,
                   mainAxisSpacing: Sizes.size10,
                   childAspectRatio: 9 / 20,
                 ),
-                itemBuilder: (context, index) => Column(
-                  children: [
-                    Container(
-                      clipBehavior: Clip.hardEdge,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          Sizes.size4,
+                itemBuilder: (context, index) => LayoutBuilder(
+                  builder: (context, constraints) => Column(
+                    children: [
+                      Container(
+                        clipBehavior: Clip.hardEdge,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            Sizes.size4,
+                          ),
+                        ),
+                        child: AspectRatio(
+                          aspectRatio: 9 / 16,
+                          child: FadeInImage.assetNetwork(
+                            fit: BoxFit.cover,
+                            placeholder: "assets/images/placeholder.jpeg",
+                            image:
+                                "https://cdn.pixabay.com/photo/2023/04/27/10/22/cat-7954262_1280.jpg",
+                          ),
                         ),
                       ),
-                      child: AspectRatio(
-                        aspectRatio: 9 / 16,
-                        child: FadeInImage.assetNetwork(
-                          fit: BoxFit.cover,
-                          placeholder: "assets/images/placeholder.png",
-                          image:
-                              "https://cdn.pixabay.com/photo/2023/04/27/10/22/cat-7954262_1280.jpg",
+                      Gaps.v10,
+                      const Text(
+                        "This is a very long caption for my tiktok that im upload just no currently.",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: Sizes.size16 + Sizes.size2,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
-                    Gaps.v10,
-                    const Text(
-                      "This is a very long caption for my tiktok that im upload just no currently.",
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: Sizes.size16 + Sizes.size2,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Gaps.v8,
-                    DefaultTextStyle(
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey.shade500,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      child: Row(
-                        children: [
-                          const CircleAvatar(
-                            radius: 12,
-                            backgroundImage: NetworkImage(
-                              "https://avatars.githubusercontent.com/u/15423024",
-                            ),
+                      Gaps.v8,
+                      if (constraints.maxWidth < 200 ||
+                          constraints.maxWidth > 250)
+                        DefaultTextStyle(
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey.shade500,
                           ),
-                          Gaps.h4,
-                          const Expanded(
-                            child: Text(
-                              'My avatar is going to be very long',
-                              maxLines: 1,
-                            ),
+                          overflow: TextOverflow.ellipsis,
+                          child: Row(
+                            children: [
+                              const CircleAvatar(
+                                radius: 12,
+                                backgroundImage: NetworkImage(
+                                  "https://avatars.githubusercontent.com/u/15423024",
+                                ),
+                              ),
+                              Gaps.h4,
+                              const Expanded(
+                                child: Text(
+                                  'My avatar is going to be very long',
+                                  maxLines: 1,
+                                ),
+                              ),
+                              Gaps.h4,
+                              FaIcon(
+                                FontAwesomeIcons.heart,
+                                size: Sizes.size16,
+                                color: Colors.grey.shade600,
+                              ),
+                              Gaps.h2,
+                              const Text(
+                                '2.5M',
+                              ),
+                            ],
                           ),
-                          Gaps.h4,
-                          FaIcon(
-                            FontAwesomeIcons.heart,
-                            size: Sizes.size16,
-                            color: Colors.grey.shade600,
-                          ),
-                          Gaps.h2,
-                          const Text(
-                            '2.5M',
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                        )
+                    ],
+                  ),
                 ),
                 itemCount: 20,
               ),

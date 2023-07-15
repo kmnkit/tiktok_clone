@@ -32,7 +32,7 @@ class _VideoCommentsState extends State<VideoComments> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery.sizeOf(context);
     return Container(
       height: size.height * 0.75,
       clipBehavior: Clip.hardEdge,

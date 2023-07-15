@@ -24,7 +24,7 @@ class _DescriptionState extends State<Description> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.8,
+      width: MediaQuery.sizeOf(context).width * 0.8,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [

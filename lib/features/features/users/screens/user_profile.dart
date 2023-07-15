@@ -102,13 +102,14 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     ),
                     Gaps.v14,
                     SizedBox(
-                      width: MediaQuery.of(context).size.width,
+                      width: MediaQuery.sizeOf(context)
+                          .width, //MediaQuery.sizeOf(context).width,
                       height: 50,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
-                            width: MediaQuery.of(context).size.width / 3,
+                            width: MediaQuery.sizeOf(context).width / 3,
                             child: Container(
                               height: 50,
                               padding: const EdgeInsets.symmetric(
@@ -181,8 +182,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             ];
           },
           body: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).height,
             child: TabBarView(
               children: [
                 GridView.builder(
@@ -201,7 +202,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         aspectRatio: 9 / 16,
                         child: FadeInImage.assetNetwork(
                           fit: BoxFit.cover,
-                          placeholder: "assets/images/placeholder.png",
+                          placeholder: "assets/images/placeholder.jpeg",
                           image:
                               "https://cdn.pixabay.com/photo/2014/02/08/01/34/chihuahua-261490_1280.jpg",
                         ),

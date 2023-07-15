@@ -12,8 +12,7 @@ class ChatDetailScreen extends StatefulWidget {
 
 class _ChatDetailScreenState extends State<ChatDetailScreen>
     with SingleTickerProviderStateMixin {
-  late final TextEditingController _textEditingController =
-      TextEditingController();
+  late final TextEditingController _textEditingController = TextEditingController();
 
   late final AnimationController _animationController = AnimationController(
     vsync: this,
@@ -147,9 +146,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen>
                         Sizes.size14,
                       ),
                       decoration: BoxDecoration(
-                        color: isMine
-                            ? Colors.amber
-                            : Theme.of(context).primaryColor,
+                        color: isMine ? Colors.amber : Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.only(
                           topLeft: const Radius.circular(Sizes.size20),
                           topRight: const Radius.circular(Sizes.size20),
@@ -177,7 +174,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen>
             ),
             Positioned(
               bottom: 0,
-              width: MediaQuery.of(context).size.width,
+              width: MediaQuery.sizeOf(context).width,
               child: BottomAppBar(
                 padding: const EdgeInsets.symmetric(
                   vertical: Sizes.size8,
