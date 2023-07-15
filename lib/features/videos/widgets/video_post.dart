@@ -28,6 +28,7 @@ class _VideoPostState extends State<VideoPost>
   late final VideoPlayerController _videoPlayerController;
 
   bool _isPaused = false;
+  bool _isMuted = false;
   final Duration _animationDuration = const Duration(milliseconds: 200);
   late final AnimationController _animationController;
 
@@ -46,6 +47,7 @@ class _VideoPostState extends State<VideoPost>
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
     if (kIsWeb) {
+      _isMuted = true;
       _videoPlayerController.setVolume(0);
     }
     _videoPlayerController.addListener(_onVideoChange);
@@ -95,6 +97,19 @@ class _VideoPostState extends State<VideoPost>
     setState(() {
       _isPaused = !_isPaused;
     });
+  }
+
+  _onVolumeTap() {
+    _isMuted = !_isMuted;
+    print(_isMuted ? '뮤트됨' : '소리켜짐');
+    if (_isMuted) {
+      _videoPlayerController.setVolume(0);
+    } else {
+      _videoPlayerController.setVolume(75);
+    }
+    setState(
+      () {},
+    );
   }
 
   void _onCommentsTap(BuildContext context) async {
@@ -180,6 +195,16 @@ class _VideoPostState extends State<VideoPost>
             right: 10,
             child: Column(
               children: [
+                GestureDetector(
+                  onTap: () => _onVolumeTap(),
+                  child: VideoButton(
+                    icon: _isMuted
+                        ? FontAwesomeIcons.volumeXmark
+                        : FontAwesomeIcons.volumeHigh,
+                    text: _isMuted ? "OFF" : "ON",
+                  ),
+                ),
+                Gaps.v24,
                 const CircleAvatar(
                   radius: 25,
                   backgroundColor: Colors.amber,
