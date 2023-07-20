@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/features/main_nav/screens/main_nav.dart';
+import 'package:tiktok_clone/features/authentication/screens/sign_up.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +22,16 @@ class TikTokApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TikTok Clone',
+      darkTheme: ThemeData(
+        scaffoldBackgroundColor: Colors.black,
+        bottomAppBarTheme: BottomAppBarTheme(
+          color: Colors.grey.shade50,
+        ),
+        primaryColor: const Color(0xFFe9435A),
+        brightness: Brightness.dark,
+      ),
+
+      themeMode: ThemeMode.dark,
       theme: ThemeData(
           appBarTheme: const AppBarTheme(
             foregroundColor: Colors.black,
@@ -44,7 +54,7 @@ class TikTokApp extends StatelessWidget {
           textSelectionTheme: const TextSelectionThemeData(
             cursorColor: Color(0xFFe9435A),
           )),
-      home: const MainNavigationScreen(),
+      home: const SignUpScreen(),
       // Scaffold에 Text 관련 주요 설정들이 있어서 Scaffold가 없으면 다 깨질 수 있음.
     );
   }

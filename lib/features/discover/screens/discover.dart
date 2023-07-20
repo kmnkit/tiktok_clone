@@ -165,8 +165,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
             // controller: _tabController,
             children: [
               GridView.builder(
-                keyboardDismissBehavior:
-                    ScrollViewKeyboardDismissBehavior.onDrag,
+                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                 padding: const EdgeInsets.all(
                   Sizes.size6,
                 ),
@@ -190,7 +189,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                           aspectRatio: 9 / 16,
                           child: FadeInImage.assetNetwork(
                             fit: BoxFit.cover,
-                            placeholder: "assets/images/placeholder.jpeg",
+                            placeholder: "assets/images/placeholder.png",
                             image:
                                 "https://cdn.pixabay.com/photo/2023/04/27/10/22/cat-7954262_1280.jpg",
                           ),
@@ -207,8 +206,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                         ),
                       ),
                       Gaps.v8,
-                      if (constraints.maxWidth < 200 ||
-                          constraints.maxWidth > 250)
+                      if (constraints.maxWidth < 200 || constraints.maxWidth > 250)
                         DefaultTextStyle(
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
