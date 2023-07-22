@@ -180,7 +180,6 @@ class _ChatDetailScreenState extends State<ChatDetailScreen>
                   vertical: Sizes.size8,
                   horizontal: 15,
                 ),
-                color: BottomAppBarTheme.of(context).color,
                 child: Row(
                   children: [
                     Expanded(

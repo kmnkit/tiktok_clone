@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/utils.dart';
 
 class CustomFormButton extends StatelessWidget {
   final bool disabled;
@@ -24,14 +25,16 @@ class CustomFormButton extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           color: disabled
-              ? Theme.of(context).disabledColor
-              : (abledColor ?? Theme.of(context).primaryColor),
+              ? isDarkMode(context)
+                  ? Colors.grey.shade800
+                  : Colors.grey.shade300
+              : Colors.white, // 사용 가능할 시 배경색
         ),
         duration: const Duration(milliseconds: 300),
         child: AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 300),
           style: TextStyle(
-            color: disabled ? Colors.white : Theme.of(context).disabledColor,
+            color: disabled ? Colors.white : Theme.of(context).primaryColor, // 배경색
             fontWeight: FontWeight.w600,
           ),
           child: Text(

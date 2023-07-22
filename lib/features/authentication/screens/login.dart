@@ -31,13 +31,16 @@ class LogInScreen extends StatelessWidget {
             ),
           ),
           Gaps.v20,
-          const Text(
-            "Manage your account, check notifications, comment on videos, and more.",
-            style: TextStyle(
-              fontSize: Sizes.size16,
-              color: Colors.black45,
+          const Opacity(
+            opacity: 0.7,
+            child: Text(
+              "Manage your account, check notifications, comment on videos, and more.",
+              style: TextStyle(
+                fontSize: Sizes.size16,
+                color: Colors.black45,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
           ),
           Gaps.v40,
           AuthButton(
@@ -58,7 +61,6 @@ class LogInScreen extends StatelessWidget {
         ],
       ),
       bottomAppBar: BottomAppBar(
-        color: Colors.grey.shade100,
         elevation: 2,
         child: Padding(
           padding: const EdgeInsets.symmetric(

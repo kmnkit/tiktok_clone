@@ -22,8 +22,7 @@ class VideoPost extends StatefulWidget {
   State<VideoPost> createState() => _VideoPostState();
 }
 
-class _VideoPostState extends State<VideoPost>
-    with SingleTickerProviderStateMixin {
+class _VideoPostState extends State<VideoPost> with SingleTickerProviderStateMixin {
   // with를 사용한다는 건 이 클래스를 복사한다는 뜻.
   late final VideoPlayerController _videoPlayerController;
 
@@ -42,8 +41,7 @@ class _VideoPostState extends State<VideoPost>
   }
 
   void _initVideoPlayer() async {
-    _videoPlayerController =
-        VideoPlayerController.asset("assets/videos/video.mp4");
+    _videoPlayerController = VideoPlayerController.asset("assets/videos/video.mp4");
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
     if (kIsWeb) {
@@ -101,7 +99,6 @@ class _VideoPostState extends State<VideoPost>
 
   _onVolumeTap() {
     _isMuted = !_isMuted;
-    print(_isMuted ? '뮤트됨' : '소리켜짐');
     if (_isMuted) {
       _videoPlayerController.setVolume(0);
     } else {

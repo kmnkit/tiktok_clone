@@ -188,8 +188,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               children: [
                 GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
-                  keyboardDismissBehavior:
-                      ScrollViewKeyboardDismissBehavior.onDrag,
+                  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     crossAxisSpacing: Sizes.size2,
@@ -202,7 +201,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         aspectRatio: 9 / 16,
                         child: FadeInImage.assetNetwork(
                           fit: BoxFit.cover,
-                          placeholder: "assets/images/placeholder.jpeg",
+                          placeholder: "assets/images/placeholder.png",
                           image:
                               "https://cdn.pixabay.com/photo/2014/02/08/01/34/chihuahua-261490_1280.jpg",
                         ),

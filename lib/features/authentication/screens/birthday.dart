@@ -103,16 +103,17 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
         ],
       ),
       bottomAppBar: BottomAppBar(
-          child: SizedBox(
-        height: 300,
-        child: CupertinoDatePicker(
-          mode: CupertinoDatePickerMode.date,
-          initialDateTime: maximumDate,
-          maximumDate: maximumDate,
-          maximumYear: maximumDate.year,
-          onDateTimeChanged: _setTextFieldDate,
+        child: SizedBox(
+          height: 300,
+          child: CupertinoDatePicker(
+            mode: CupertinoDatePickerMode.date,
+            initialDateTime: maximumDate,
+            maximumDate: maximumDate,
+            maximumYear: maximumDate.year,
+            onDateTimeChanged: _setTextFieldDate,
+          ),
         ),
-      )),
+      ),
     );
   }
 }
