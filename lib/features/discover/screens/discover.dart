@@ -102,9 +102,6 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                 fontWeight: FontWeight.w600,
                 fontSize: Sizes.size16,
               ),
-              indicatorColor: Colors.black,
-              labelColor: Colors.pink.shade600,
-              unselectedLabelColor: Colors.grey.shade500,
               tabs: [
                 for (var tab in tabs)
                   Tab(
@@ -158,6 +155,9 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                       : null,
                 ),
                 textCapitalization: TextCapitalization.none,
+                style: const TextStyle(
+                  color: Colors.black,
+                ),
               ),
             ),
           ),

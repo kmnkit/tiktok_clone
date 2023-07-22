@@ -134,8 +134,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
                   runSpacing: 16,
                   spacing: 16,
                   children: [
-                    for (var interest in interests)
-                      InterestButton(interest: interest)
+                    for (var interest in interests) InterestButton(interest: interest)
                   ],
                 ),
                 Gaps.v12,
@@ -144,8 +143,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        elevation: 1,
+      bottomNavigationBar: Container(
         child: Padding(
           padding: const EdgeInsets.only(
             bottom: Sizes.size40,

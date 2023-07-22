@@ -175,7 +175,6 @@ class _ActivityScreenState extends State<ActivityScreen>
                       child: const Center(
                         child: FaIcon(
                           FontAwesomeIcons.bell,
-                          color: Colors.black,
                         ),
                       ),
                     ),
@@ -222,9 +221,9 @@ class _ActivityScreenState extends State<ActivityScreen>
           SlideTransition(
             position: _panelAnimation,
             child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: Theme.of(context).appBarTheme.backgroundColor,
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(
                     Sizes.size5,
                   ),
@@ -242,7 +241,6 @@ class _ActivityScreenState extends State<ActivityScreen>
                         children: [
                           FaIcon(
                             tab['icon'],
-                            color: Colors.black,
                             size: Sizes.size16,
                           ),
                           Gaps.h20,
